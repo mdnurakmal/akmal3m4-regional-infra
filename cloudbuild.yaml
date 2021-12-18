@@ -1,14 +1,14 @@
 steps:
-  - id: "Build community builders image for terraform"
-    name: "gcr.io/cloud-builders/git"
-    entrypoint: 'bash'
-    args:
-    - '-c'
-    - |
-      git clone https://github.com/GoogleCloudPlatform/cloud-builders-community
-      cd cloud-builders-community/terraform
-      gcloud builds submit --config cloudbuild.yaml .
-      cd ..
+  # - id: "Build community builders image for terraform"
+  #   name: "gcr.io/cloud-builders/git"
+  #   entrypoint: 'bash'
+  #   args:
+  #   - '-c'
+  #   - |
+  #     git clone https://github.com/GoogleCloudPlatform/cloud-builders-community
+  #     cd cloud-builders-community/terraform
+  #     gcloud builds submit --config cloudbuild.yaml .
+  #     cd ..
 
   - id: "Configure load balancer"
     name: "gcr.io/${PROJECT_ID}/terraform"
