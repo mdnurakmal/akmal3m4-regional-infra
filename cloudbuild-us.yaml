@@ -1,0 +1,30 @@
+steps:
+  # - id: "Build community builders image for terraform"
+  #   name: "gcr.io/cloud-builders/git"
+  #   entrypoint: 'bash'
+  #   args:
+  #   - '-c'
+  #   - |
+  #     git clone https://github.com/GoogleCloudPlatform/cloud-builders-community
+  #     cd cloud-builders-community/terraform
+  #     gcloud builds submit --config cloudbuild.yaml .
+  #     cd ..
+
+  - id: "Configure load balancer"
+    name: "gcr.io/${PROJECT_ID}/terraform"
+    entrypoint: 'bash'
+    args:
+    - '-c' 
+    - |
+      gcloud config list account --format "value(core.account)"
+      gcloud auth configure-docker ${_MULTIREGION}-docker.pkg.dev
+
+      terraform init -backend-config="bucket=${PROJECT_ID}-terraform-files" -backend-config="prefix=terraform/${_MULTIREGION}/infra/state"
+      terraform apply -auto-approve -var project_id=${PROJECT_ID} -var region=${_REGION} -var multiregion=${_MULTIREGION}
+
+substitutions:
+    _REGION: us-central1 # default value
+    _MULTIREGION: us # default value
+
+options:
+  logging: CLOUD_LOGGING_ONLY
