@@ -26,7 +26,7 @@ resource "google_compute_backend_service" "game-server-backend-service" {
   connection_draining_timeout_sec = 10
 
   backend {
-    group = game-server-asia-neg
+    group = "game-server-asia-neg"
   }
 
 }
@@ -39,6 +39,6 @@ resource "google_compute_backend_service" "game-client-backend-service" {
   connection_draining_timeout_sec = 10
 
   backend {
-    group = game-client-asia-neg
+    group = "game-client-asia-neg"
   }
 }
