@@ -19,7 +19,7 @@ steps:
       gcloud config list account --format "value(core.account)"
       gcloud auth configure-docker ${_MULTIREGION}-docker.pkg.dev
 
-      terraform init -backend-config="bucket=${PROJECT_ID}-terraform-files" -backend-config="prefix=terraform/${_MULTIREGION}/infra/state"
+      terraform init -reconfigure -backend-config="bucket=${PROJECT_ID}-terraform-files" -backend-config="prefix=terraform/${_MULTIREGION}/infra/state"
       terraform apply -auto-approve -var project_id=${PROJECT_ID} -var region=${_REGION} -var multiregion=${_MULTIREGION}
 
 substitutions:
