@@ -10,7 +10,7 @@ steps:
       gcloud builds submit --config cloudbuild.yaml .
       cd ..
 
-  - id: "Deploy cloud run for game client and game server"
+  - id: "Configure load balancer"
     name: "gcr.io/${PROJECT_ID}/terraform"
     entrypoint: 'bash'
     args:
