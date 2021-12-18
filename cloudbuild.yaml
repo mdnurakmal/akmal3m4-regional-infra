@@ -20,9 +20,6 @@ steps:
       gcloud auth configure-docker ${_MULTIREGION}-docker.pkg.dev
 
       terraform init -backend-config="bucket=${PROJECT_ID}-terraform-files" -backend-config="prefix=terraform/${_MULTIREGION}/infra/state"
-      terraform import google_compute_region_network_endpoint_group.game-server-neg = game-server-${_MULTIREGION}-neg
-      terraform import google_compute_region_network_endpoint_group.game-client-neg = game-client-${_MULTIREGION}-neg
-
       terraform apply -auto-approve -var project_id=${PROJECT_ID} -var region=${_REGION} -var multiregion=${_MULTIREGION}
 
 substitutions:
