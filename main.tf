@@ -42,3 +42,31 @@ resource "google_compute_backend_service" "game-client-backend-service" {
     group = "projects/${var.project_id}/regions/${var.region}/networkEndpointGroups/game-client-asia-neg"
   }
 }
+
+# creating buckets
+
+resource "google_compute_backend_bucket" "web-static-files-backend-bucket-asia" {
+  name        = "web-static-files-backend-bucket-asia"
+  bucket_name = google_storage_bucket.web-static-files-bucket-asia.name
+  enable_cdn  = true
+}
+
+resource "google_storage_bucket" "web-static-files-bucket-asia" {
+  name     = "dronegaga-web-static-files-asia"
+  location = "asia"
+}
+
+resource "google_compute_backend_bucket" "game-assets-backend-bucket-asia" {
+  name        = "game-assets-backend-bucket-asia"
+  bucket_name = google_storage_bucket.game-assets-bucket-asia.name
+  enable_cdn  = true
+}
+
+resource "google_storage_bucket" "game-assets-bucket-asia" {
+  name     = "dronegaga-game-assets-asia"
+  location = "asia"
+}
+
+
+
+
