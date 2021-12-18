@@ -17,32 +17,6 @@ provider "google" {
   region      = var.region
 }
 
-
-resource "google_compute_backend_service" "game-server-backend-service" {
-  provider = google-beta
-  project = var.project_id
-  name                            = "game-server-backend-service-${var.multiregion}"
-  enable_cdn                      = true
-  connection_draining_timeout_sec = 10
-
-  backend {
-  group = "projects/${var.project_id}/regions/${var.region}/networkEndpointGroups/game-server-${var.multiregion}-neg"
-  }
-
-}
-
-resource "google_compute_backend_service" "game-client-backend-service" {
-  provider = google-beta
-  project = var.project_id
-  name                            = "game-client-backend-service-${var.multiregion}"
-  enable_cdn                      = true
-  connection_draining_timeout_sec = 10
-
-  backend {
-    group = "projects/${var.project_id}/regions/${var.region}/networkEndpointGroups/game-client-${var.multiregion}-neg"
-  }
-}
-
 # creating buckets
 
 resource "google_compute_backend_bucket" "web-static-files-backend-bucket" {
