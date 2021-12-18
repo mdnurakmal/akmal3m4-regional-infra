@@ -67,17 +67,3 @@ resource "google_storage_bucket" "game-assets-bucket" {
   location = "${var.multiregion}"
 }
 
-# creating backend bucket
-resource "google_compute_backend_bucket" "web-static-files-backend-bucket" {
-  name        = "web-static-files-backend-bucket"
-  bucket_name = google_storage_bucket.web-static-files-bucket.name
-  enable_cdn  = true
-}
-
-resource "google_compute_backend_bucket" "game-assets-backend-bucket" {
-  name        = "game-assets-backend-bucket"
-  bucket_name = google_storage_bucket.game-assets-bucket.name
-  enable_cdn  = true
-}
-
-
