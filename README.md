@@ -4,6 +4,7 @@ Instructions
 
 ```
 export CLOUDSDK_PYTHON_SITEPACKAGES=1
+git pull
 ```
 
 ```
